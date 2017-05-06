@@ -1,27 +1,30 @@
 import os 
+import subprocess
+host = "0.0.0.0"
+host1 = '8.8.8.8'
+host2 = "8.8.8.4"
+host3 = "192.168.1.1"
+host4= "192.168.1.2"
 
-response1 = os.system("ping -c 1 8.8.8.8")
-response2 = os.system("ping -c 1 8.8.8.4")
-response3 = os.system("ping -c 1 192.168.1.1")
-response4 = os.system("ping -c 1 192.168.1.2")
+def pingCheck(host): #With Pin
+    response = os.system("ping -q " + host)
+    if response == 0:
+        print (host + " Reachable")
+    else:
+        print(host + " Unreachable")
 
 
-if response1 == 0:
-    print ("8.8.8.8 Reachable")
-elif response1 ==256:
-    print ("8.8.8.8 Unreachable")
 
-if response2 == 0:
-    print ("8.8.8.4 Reachable ")
-elif response2 ==256:
-    print ("8.8.8.4 Unreachable ")
+def pingCh(host):
+    with open(os.devnull, "wb") as limbo:
+        response = subprocess.Popen(["ping", "-c", "1", "-n", "-W", "2", host],
+            stdout=limbo, stderr=limbo).wait()
+        if response==0:
+            print(host + " Reachable")
+        else:
+            print (host + " Unreachable")
 
-if response3 == 0:
-    print ("192.168.1.1 Reachable ")
-elif response3 ==256:
-    print ("192.168.1.1 Ureachable ")
-
-if response4 == 0:
-    print ("192.168.1.2 Reachable")
-elif response4 ==256:
-    print ("192.168.1.2 Ureachable ")
+pingCh(host1)
+pingCh(host2)
+pingCh(host3)
+pingCh(host4)
