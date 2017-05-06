@@ -14,3 +14,9 @@ pingCh("8.8.8.8")
 pingCh("8.8.8.4")
 pingCh("192.168.1.1")
 pingCh("192.168.1.2")
+
+list1 = [1,2,3]
+
+for x in range(0,3):
+    print (list1[x])
+    
