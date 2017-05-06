@@ -1,6 +1,5 @@
-print("Hello World")
-print(1)
-print(1 + 2)
-var1 = "Stephen Sembrano"
+import os 
 
-print (var1)
+response = os.system("ping -c 2 8.8.8.8")
+
+print (response)
